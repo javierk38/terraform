@@ -53,4 +53,5 @@ stages:
           command: plan
           workingDirectory: $(terraformWorkingDirectory)
           environmentServiceName: $(serviceConnection)
-          commandOptions: -var location=$(azureLocation) skip_provider_registration = true
+          commandOptions: -var location=$(azureLocation)
+          skip_provider_registration: true
