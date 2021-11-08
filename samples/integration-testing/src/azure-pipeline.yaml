@@ -27,7 +27,7 @@ stages:
         vmImage: ubuntu-20.04
       steps:
       # Step 0 : run the Checkov Static Code Analysis
-      - script:
+      - script: |
           mkdir CheckovReport
           ls
           touch Checkov-Report.xml
