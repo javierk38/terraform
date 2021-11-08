@@ -28,6 +28,7 @@ stages:
       steps:
       # Step 0 : run the Checkov Static Code Analysis
       - script: |
+          cd $(terraformWorkingDirectory)
           mkdir CheckovReport
           touch CheckovReport/Checkov-Report.xml
           ls -la CheckovReport
