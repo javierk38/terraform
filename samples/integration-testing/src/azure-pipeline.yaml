@@ -26,10 +26,27 @@ stages:
       pool:
         vmImage: ubuntu-20.04
       steps:
+      # Step 0 : run the Checkov Static Code Analysis
+      - script:
+        mkdir CHeckovReport
+        docker pull bridgecrew/checkov
+        docker run --tty --volume $(terraformWorkingDirectory):/tf bridgecrew/checkov --directory /tf --output junitxml > $(terraformWorkingDirectory)/CheckovReport/Checkov-Report.xml
+        displayName: Checkov Static Code Analysis Docker Script
+
+      - task: PublishTestResults@2
+        displayName: Publish Checkov Test Results
+        condition: succeedOrFailed()
+        inputs:
+          testResultsFormat: 'JUnit'
+          testResultsFiles: '**/*Checkov-Report.xml'
+          searchFolder: '$(terraformWorkingDirectory)/CheckovReport'
+          mergerTestResults: false
+          testRunTitle: Checkov Scan
+          failTaskOnFailedTests: false
+          publishRunAttachments: true
       # Step 1: run the Checkov Static Code Analysis
       - bash: $(terraformWorkingDirectory)/checkov.sh $(terraformWorkingDirectory)
         displayName: Checkov Static Code Analysis
-        
       # Step 2: install Terraform on the Azure Pipelines agent
       - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
         displayName: 'Install Terraform'
