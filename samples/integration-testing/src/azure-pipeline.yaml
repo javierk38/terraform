@@ -35,7 +35,7 @@ stages:
 
       - task: PublishTestResults@2
         displayName: Publish Checkov Test Results
-        condition: succeedOrFailed()
+        condition: succeededOrFailed()
         inputs:
           testResultsFormat: 'JUnit'
           testResultsFiles: '**/*Checkov-Report.xml'
