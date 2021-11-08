@@ -31,9 +31,10 @@ stages:
           cd $(terraformWorkingDirectory)
           mkdir CheckovReport
           touch CheckovReport/Checkov-Report.xml
+          chmod 777 CheckovReport/Checkov-Report.xml
           ls -la CheckovReport
           docker pull bridgecrew/checkov
-          docker run --tty --volume $(terraformWorkingDirectory):/tf bridgecrew/checkov --directory /tf --output junitxml >> $(terraformWorkingDirectory)/CheckovReport/Checkov-Report.xml
+          docker run --tty --volume $(terraformWorkingDirectory):/tf bridgecrew/checkov --directory /tf --output junitxml > $(terraformWorkingDirectory)/CheckovReport/Checkov-Report.xml
         displayName: Checkov Static Code Analysis Docker Script
 
       - task: PublishTestResults@2
