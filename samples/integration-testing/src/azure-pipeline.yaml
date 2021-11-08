@@ -29,8 +29,8 @@ stages:
       # Step 0 : run the Checkov Static Code Analysis
       - script: |
           mkdir CheckovReport
-          ls
-          touch Checkov-Report.xml
+          touch CheckovReport/Checkov-Report.xml
+          ls -la CheckovReport
           docker pull bridgecrew/checkov
           docker run --tty --volume $(terraformWorkingDirectory):/tf bridgecrew/checkov --directory /tf --output junitxml >> $(terraformWorkingDirectory)/CheckovReport/Checkov-Report.xml
         displayName: Checkov Static Code Analysis Docker Script
