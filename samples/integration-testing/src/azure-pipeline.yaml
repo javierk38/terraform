@@ -27,7 +27,7 @@ stages:
         vmImage: ubuntu-20.04
       steps:
       # Step 1: run the Checkov Static Code Analysis
-      - bash: $(terraformWorkingDirectory)/checkov.sh $(terraformWorkingDirectory)
+      - bash: $(terraformWorkingDirectory)/checkov.sh $(terraformWorkingDirectory) && sed -i '$d' 01-Checkov-Report.xml
         displayName: Checkov Static Code Analysis
     
       # Step 0 : run the Checkov Static Code Analysis
