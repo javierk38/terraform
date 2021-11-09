@@ -23,7 +23,7 @@ chmod 777 Checkov-Report.xml
 #######################################
 run_checkov() {
   local test_dir=$1
-  docker run -t -v "${test_dir}":/tf bridgecrew/checkov:latest -d /tf -o junitxml >> /tf/Checkov-Report.xml
+  docker run -t -v "${test_dir}":/tf bridgecrew/checkov:latest -d /tf -o junitxml >> Checkov-Report.xml
 }
 
 #######################################
