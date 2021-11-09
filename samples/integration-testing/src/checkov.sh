@@ -11,8 +11,6 @@ set -eo pipefail
 
 # The target directory for scanning.
 WORK_DIR=${1-$(pwd)}
-touch Checkov-Report.xml
-chmod 777 Checkov-Report.xml
 #######################################
 # run_checkov() docker command
 # Arguments:
@@ -23,9 +21,9 @@ chmod 777 Checkov-Report.xml
 #######################################
 run_checkov() {
   local test_dir=$1
-  docker run -t -v "${test_dir}":/tf bridgecrew/checkov:latest -d /tf -o junitxml
+  docker run -t -v "${test_dir}":/tf bridgecrew/checkov:latest -d /tf 
 }
-echo $? >> Checkov-Report.xml
+
 #######################################
 # find_folders_by() file pattern
 # Globals:
