@@ -35,7 +35,7 @@ stages:
           ls -la CheckovReport
           pwd
           docker pull bridgecrew/checkov
-          docker run -t -v $(terraformWorkingDirectory):/tf bridgecrew/checkov --directory /tf
+          docker run -t -v $(terraformWorkingDirectory):/tf bridgecrew/checkov -d /tf -o junitxml
         displayName: Checkov Static Code Analysis Docker Script
 
       - task: PublishTestResults@2
