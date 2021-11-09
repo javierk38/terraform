@@ -11,7 +11,8 @@ set -eo pipefail
 
 # The target directory for scanning.
 WORK_DIR=${1-$(pwd)}
-
+touch Checkov-Report.xml
+chmod 777 Checkov-Report.xml
 #######################################
 # run_checkov() docker command
 # Arguments:
