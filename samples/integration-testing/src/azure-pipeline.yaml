@@ -34,6 +34,7 @@ stages:
       - script: |
          pip install checkov
          checkov -d $(terraformWorkingDirectory) -o junitxml >> Checkov-Report.xml 
+         sed -i '$d' Checkov-Report.xml
         displayName: Checkov Static Code Analysis Docker Script        
       - task: PublishTestResults@2
         displayName: Publish Checkov Test Results
