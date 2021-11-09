@@ -22,9 +22,8 @@ WORK_DIR=${1-$(pwd)}
 run_checkov() {
   local test_dir=$1
   docker run -t -v "${test_dir}":/tf bridgecrew/checkov:latest -d /tf -o junitxml >> 01-Checkov-Report.xml
-  sed -i '$d' 01-Checkov-Report.xml
 }
-
+sed -i '$d' 01-Checkov-Report.xml
 #######################################
 # find_folders_by() file pattern
 # Globals:
