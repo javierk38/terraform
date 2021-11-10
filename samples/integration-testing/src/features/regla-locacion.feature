@@ -3,4 +3,4 @@ Feature: check ubicacion
     Scenario: ubicacion West Europe
         Given I have azurerm_resource_group defined
         Then it must contain location
-        And its value must be westeurope
+        And its value must be westus
