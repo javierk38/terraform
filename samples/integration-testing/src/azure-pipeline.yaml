@@ -77,7 +77,7 @@ stages:
           targetType: 'inline'
           script: |
             docker pull eerkunt/terraform-compliance
-            function terraform-compliance { winpty docker run --rm -v $(terraformWorkingDirectory):/target -t eerkunt/terraform-compliance "$@"; }
+            function terraform-compliance { docker run -i -t --rm -v $(terraformWorkingDirectory):/target eerkunt/terraform-compliance "$@"; }
             terraform-compliance -p plan.out -f features
         displayName: Compliance check
         
