@@ -72,8 +72,13 @@ stages:
           workingDirectory: $(terraformWorkingDirectory)
           environmentServiceName: $(serviceConnection)
           commandOptions: -var location=$(azureLocation) --out $(terraformWorkingDirectory)/plan.out
-      - script: |
-         docker pull eerkunt/terraform-compliance
-         function terraform-compliance { docker run --rm -v $(terraformWorkingDirectory):/target -i -t eerkunt/terraform-compliance "$@"; }
-         terraform-compliance -p plan.out -f features
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: |
+            docker pull eerkunt/terraform-compliance
+            function terraform-compliance { docker run --rm -v $(terraformWorkingDirectory):/target -i -t eerkunt/terraform-compliance "$@"; }
+            terraform-compliance -p plan.out -f features
+        displayName: Compliance check
+        
 
